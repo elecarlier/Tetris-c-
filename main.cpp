@@ -29,6 +29,7 @@ void printShape(const Tetromino::Shape& shape) {
 // }
 
 int main() {
+
     Board board;
 
     // Place une pièce T (type = 6), rotation = 0, en (4, 0)
@@ -36,6 +37,10 @@ int main() {
     board.StorePiece(4, 3, 6, 0);
 
     board.PrintBoard();
-
+    std::cout << "\n----------------\n";
+    
+    //board.StorePiece(6, 3, 4, 0);
+    board.PrintBoard();
+    std::cout << "\n----------------\n";
     return 0;
 }

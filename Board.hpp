@@ -9,7 +9,7 @@
 #define BOARD_HEIGHT 20
 
 class Board {
-public:
+        public:
         enum { POS_FREE = 0, POS_FILLED = 1 };
 
         Board();
@@ -18,8 +18,7 @@ public:
         bool IsFreeBlock(int x, int y) const;
         void PrintBoard() const;
         void StorePiece(int pX, int pY, int pPiece, int pRotation);
-
-        //bool isGameOver() const;
+        bool IsGameOver() const;
         //void deletePossibleLines();
 
     private:

@@ -9,21 +9,21 @@ Board::Board() {
 }
 
 void Board::InitBoard() {
-    for (int x = 0; x < BOARD_WIDTH; ++x)
-        for (int y = 0; y < BOARD_HEIGHT; ++y)
-            mBoard[x][y] = POS_FREE;
+    for (int y = 0; y < BOARD_HEIGHT; ++y)
+        for (int x = 0; x < BOARD_WIDTH; ++x)
+            mBoard[y][x] = POS_FREE;
 }
 
 bool Board::IsFreeBlock(int x, int y) const {
     if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT)
         return false;
-    return mBoard[x][y] == POS_FREE;
+    return mBoard[y][x] == POS_FREE;
 }
 
 void Board::PrintBoard() const {
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
         for (int x = 0; x < BOARD_WIDTH; ++x) {
-            std::cout << (mBoard[x][y] == POS_FREE ? '.' : '#');
+            std::cout << (mBoard[y][x] == POS_FREE ? '.' : '#');
         }
         std::cout << '\n';
     }
@@ -45,13 +45,22 @@ void Board::StorePiece(int pX, int pY, int pPieceType, int pRotation)
                 int boardX = pX + (j - pivot_j);
 
                 if (boardX >= 0 && boardX < BOARD_WIDTH &&
-                    boardY >= 0 && boardY < BOARD_HEIGHT) {
-                    mBoard[boardX][boardY] = POS_FILLED;
+                    boardY >= 0 && boardY < BOARD_HEIGHT)  {
+                    mBoard[boardY][boardX] = POS_FILLED;
                 }
-            if (shape[i][j] == 2)
-                std::cout << "Pivot placé à : (" << boardX << ", " << boardY << ")\n";
             }
         }
     }
 }
 
+//If the first line has blocks, then, game over
+bool Board::IsGameOver() const
+{
+
+    for (int x = 0; x < BOARD_WIDTH; x++)
+    {
+        if (mBoard[0][x] == POS_FILLED) return true;
+    }
+
+    return false;
+}
