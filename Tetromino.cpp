@@ -2,9 +2,13 @@
 
 Tetromino::Tetromino() {}
 
-//std::array<<Rotations, NUM_TYPES> generateAll();
-
-//skip rotation for the square
+std::array<Tetromino::Rotations, Tetromino::NUM_TYPE> Tetromino::generateAll() {
+    std::array<Rotations, NUM_TYPE> allShapes{};
+    for (int type = 0; type < NUM_TYPE; ++type) {
+        allShapes[type] = generateShape(type);
+    }
+    return allShapes;
+}
 
 Tetromino::Rotations Tetromino::generateShape(int type)
 {
