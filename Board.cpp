@@ -54,6 +54,12 @@ void Board::StorePiece(int pX, int pY, int pPieceType, int pRotation)
     }
 }
 
+
+bool Board::IsPossibleMovement (int pX, int pY, int pPiece, int pRotation)
+{
+    //to do 
+}
+
 //If the first line has blocks, then, game over
 bool Board::IsGameOver() const
 {

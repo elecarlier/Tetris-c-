@@ -15,7 +15,6 @@ class Tetromino {
 
         Tetromino();
         static std::array<Rotations, NUM_TYPE> generateAll();
-        //int blocks[7][4][SIZE][SIZE];
         static Rotations generateShape(int type); // Génère une forme avec ses rotations
     private:
         

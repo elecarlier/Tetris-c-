@@ -21,6 +21,7 @@ class Board {
         void DeletePossibleLines();
         void DeleteLine(int py);
         void DebugFillLine(int y);
+        void IsPossibleMovement (int pX, int pY, int pPiece, int pRotation);
 
     private:
 
