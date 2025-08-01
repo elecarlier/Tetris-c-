@@ -14,17 +14,18 @@ class Board {
 
         Board();
 
-        
         bool IsFreeBlock(int x, int y) const;
         void PrintBoard() const;
         void StorePiece(int pX, int pY, int pPiece, int pRotation);
         bool IsGameOver() const;
-        //void deletePossibleLines();
+        void DeletePossibleLines();
+        void DeleteLine(int py);
+        void DebugFillLine(int y);
 
     private:
 
         void InitBoard();
-        int mBoard[BOARD_WIDTH][BOARD_HEIGHT];
+        int mBoard[BOARD_HEIGHT][BOARD_WIDTH];
         std::array<Tetromino::Rotations, Tetromino::NUM_TYPE> allPieces;
 };
 

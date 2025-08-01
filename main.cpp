@@ -28,19 +28,21 @@ void printShape(const Tetromino::Shape& shape) {
 //     return 0;
 // }
 
-int main() {
 
+
+int main() {
     Board board;
 
-    // Place une pièce T (type = 6), rotation = 0, en (4, 0)
-   //board.PrintBoard();
-    board.StorePiece(4, 3, 6, 0);
+    board.DebugFillLine(19);
+    std::cout << "Avant suppression :\n";
+    board.PrintBoard();
+    std::cout << "----------------\n";
 
+    board.DeletePossibleLines();
+
+    std::cout << "Après suppression :\n";
     board.PrintBoard();
-    std::cout << "\n----------------\n";
-    
-    //board.StorePiece(6, 3, 4, 0);
-    board.PrintBoard();
-    std::cout << "\n----------------\n";
+    std::cout << "----------------\n";
+
     return 0;
 }

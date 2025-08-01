@@ -24,6 +24,7 @@ void Board::PrintBoard() const {
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
         for (int x = 0; x < BOARD_WIDTH; ++x) {
             std::cout << (mBoard[y][x] == POS_FREE ? '.' : '#');
+            //std::cout << mBoard[y][x]; 
         }
         std::cout << '\n';
     }
@@ -63,4 +64,45 @@ bool Board::IsGameOver() const
     }
 
     return false;
+}
+
+/*py: height of the line to delete 
+delete a line and moves down all the blocs above*/
+void Board::DeleteLine(int py)
+{
+    for (int y = py; y > 0; --y)
+    {
+        for (int x = 0; x < BOARD_WIDTH; ++x)
+            mBoard[y][x] = mBoard[y-1][x];
+    }
+
+    for (int x = 0; x < BOARD_WIDTH; ++x)
+        mBoard[0][x] = POS_FREE;
+}
+
+
+
+void Board::DeletePossibleLines()
+{
+    for (int y = 0; y < BOARD_HEIGHT; ++y)
+    {
+        int filled = 0;
+        for (int x = 0; x < BOARD_WIDTH; ++x)
+        {
+            if (mBoard[y][x] == POS_FILLED)
+                filled++;
+        }  
+        if ( filled == BOARD_WIDTH)
+        {
+            DeleteLine(y);
+            --y;
+        } 
+            
+    }   
+}
+
+void Board::DebugFillLine(int y) {
+    for (int x = 0; x < BOARD_WIDTH; ++x) {
+        mBoard[y][x] = POS_FILLED;
+    }
 }
