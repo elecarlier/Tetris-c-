@@ -92,4 +92,5 @@ void Game::DrawScene()
 {
     DrawBoard();
     DrawPiece(mCurrentPiece);
-    DrawPiece(mNextPiece);    
+    DrawPiece(mNextPiece);
+}
