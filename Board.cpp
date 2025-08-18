@@ -24,40 +24,73 @@ void Board::PrintBoard() const {
     for (int y = 0; y < BOARD_HEIGHT; ++y) {
         for (int x = 0; x < BOARD_WIDTH; ++x) {
             std::cout << (mBoard[y][x] == POS_FREE ? '.' : '#');
-            //std::cout << mBoard[y][x]; 
+            //std::cout << mBoard[y][x];
         }
         std::cout << '\n';
     }
 }
 
-/*Store a piece at px, py position
-    using the pivot as the position */
-void Board::StorePiece(int pX, int pY, int pPieceType, int pRotation)
+void Board::StorePiece(const Piece& piece)
 {
-    const auto& shape = allPieces[pPieceType][pRotation];
-    const int pivot_i = 2;
-    const int pivot_j = 2;
+    std::vector<std::pair<int,int>> blocks = piece.GetBlocks();
 
-    for (int i = 0; i < Tetromino::SIZE; ++i) {
-        for (int j = 0; j < Tetromino::SIZE; ++j) {
+    for (int i = 0; i < blocks.size(); ++i)
+    {
+        int bx = blocks[i].first;
+        int by = blocks[i].second;
 
-            if (shape[i][j] != 0) {
-                int boardY = pY + (i - pivot_i);
-                int boardX = pX + (j - pivot_j);
-
-                if (boardX >= 0 && boardX < BOARD_WIDTH &&
-                    boardY >= 0 && boardY < BOARD_HEIGHT)  {
-                    mBoard[boardY][boardX] = POS_FILLED;
-                }
-            }
+        if (bx >= 0 && bx < BOARD_WIDTH && by >= 0 && by < BOARD_HEIGHT)
+        {
+            mBoard[by][bx] = POS_FILLED;
         }
     }
 }
 
 
-bool Board::IsPossibleMovement (int pX, int pY, int pPiece, int pRotation)
+// /*Store a piece at px, py position
+//     using the pivot as the position */
+// void Board::StorePiece(int pX, int pY, int pPieceType, int pRotation)
+// {
+//     const auto& shape = allPieces[pPieceType][pRotation];
+//     const int pivot_i = 2;
+//     const int pivot_j = 2;
+
+//     for (int i = 0; i < Tetromino::SIZE; ++i) {
+//         for (int j = 0; j < Tetromino::SIZE; ++j) {
+
+//             if (shape[i][j] != 0) {
+//                 int boardY = pY + (i - pivot_i);
+//                 int boardX = pX + (j - pivot_j);
+
+//                 if (boardX >= 0 && boardX < BOARD_WIDTH &&
+//                     boardY >= 0 && boardY < BOARD_HEIGHT)  {
+//                     mBoard[boardY][boardX] = POS_FILLED;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+/*Check for collisions with border or oder pieces*/
+bool Board::IsPossibleMovement (const Piece& piece) const
 {
-    //to do 
+    std::vector<std::pair<int, int>> blocks = piece.GetBlocks();
+
+    for (int i = 0; i < blocks.size(); ++k)
+    {
+        int bx = blocks[i].first;
+        int by = blocks[i].second;
+
+        //bordres
+        if (bx < 0 || bx >= BOARD_WIDTH || by < 0 || by >= BOARD_HEIGHT)
+            return false;
+
+        //collision with oder pieces
+        if (mBoard[by][bx] == POS_FILLED)
+            return false;
+    }
+    return true;
+
 }
 
 //If the first line has blocks, then, game over
@@ -72,7 +105,7 @@ bool Board::IsGameOver() const
     return false;
 }
 
-/*py: height of the line to delete 
+/*py: height of the line to delete
 delete a line and moves down all the blocs above*/
 void Board::DeleteLine(int py)
 {
@@ -97,14 +130,23 @@ void Board::DeletePossibleLines()
         {
             if (mBoard[y][x] == POS_FILLED)
                 filled++;
-        }  
+        }
         if ( filled == BOARD_WIDTH)
         {
             DeleteLine(y);
             --y;
-        } 
-            
-    }   
+        }
+
+    }
+}
+/* x = 0 ; centered up and left */
+int Board::GetXPosInPixels(int x) {
+    return x * BLOCK_SIZE;
+}
+
+/*y = 0 ; centered up and left */
+int Board::GetYPosInPixels(int y) {
+    return y * BLOCK_SIZE;
 }
 
 void Board::DebugFillLine(int y) {

@@ -7,6 +7,9 @@
 
 #define BOARD_WIDTH 10
 #define BOARD_HEIGHT 20
+#define BLOCK_SIZE 30
+
+
 
 class Board {
         public:
@@ -16,12 +19,16 @@ class Board {
 
         bool IsFreeBlock(int x, int y) const;
         void PrintBoard() const;
-        void StorePiece(int pX, int pY, int pPiece, int pRotation);
+        void StorePiece(const Piece& piece);
+        //void StorePiece(int pX, int pY, int pPiece, int pRotation);
         bool IsGameOver() const;
         void DeletePossibleLines();
         void DeleteLine(int py);
         void DebugFillLine(int y);
-        void IsPossibleMovement (int pX, int pY, int pPiece, int pRotation);
+        bool IsPossibleMovement (const Piece& piece) const;
+
+        int GetXPosInPixels(int x);
+        int GetYPosInPixels(int y);
 
     private:
 
