@@ -23,7 +23,7 @@ class Game {
         void MoveRight();
         void MoveDown();
         void RotatePiece();
-        
+
     private:
 
         //int mPosX, mPosY;
@@ -40,7 +40,7 @@ class Game {
         // int GetRand (int pA, int pB);
         // void InitGame();
         // void DrawPiece (int pX, int pY, int pPiece, int pRotation);
-        // void DrawBoard ();
+        void DrawBoard ();
 };
 
 #endif

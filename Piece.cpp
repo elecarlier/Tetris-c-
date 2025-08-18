@@ -81,4 +81,7 @@ std::vector<std::pair<int, int>> Piece::GetBlocks() const
     return blocks;
 }
 
-
+bool Piece::IsPivot(int blockX, int blockY) const
+{
+    return (blockX == x && blockY == y);
+}

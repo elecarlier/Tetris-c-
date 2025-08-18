@@ -23,6 +23,7 @@ class Piece {
 
         // Renvoie les blocs occupés par la pièce sous forme de coordonnées (x, y)
         std::vector<std::pair<int, int>> GetBlocks() const;
+        bool IsPivot(int blockX, int blockY) const;
 
     private:
         int type;       //  0..6
