@@ -1,6 +1,10 @@
 #include "Board.hpp"
 
-Board::Board() {
+
+
+Board::Board(int screenW, int screenH)
+    : screenWidth(screenW), screenHeight(screenH)
+{
     InitBoard();
 
     for (int type = 0; type < Tetromino::NUM_TYPE; ++type) {
@@ -83,8 +87,11 @@ bool Board::IsPossibleMovement (const Piece& piece) const
 
         //bordres
         if (bx < 0 || bx >= BOARD_WIDTH || by < 0 || by >= BOARD_HEIGHT)
+        {
+            std::cerr<<"Hitting borers";
             return false;
-
+        }
+            
         //collision with oder pieces
         if (mBoard[by][bx] == POS_FILLED)
             return false;
@@ -139,15 +146,19 @@ void Board::DeletePossibleLines()
 
     }
 }
-/* x = 0 ; centered up and left */
-int Board::GetXPosInPixels(int x) {
-    return x * BLOCK_SIZE;
+
+int Board::GetXPosInPixels(int x)  {
+    int leftX = (screenWidth - (BOARD_WIDTH * BLOCK_SIZE)) / 2; 
+    return leftX + x * BLOCK_SIZE;
 }
 
-/*y = 0 ; centered up and left */
-int Board::GetYPosInPixels(int y) {
-    return y * BLOCK_SIZE;
+
+
+int Board::GetYPosInPixels(int y)  {
+    int topY = screenHeight - (BOARD_HEIGHT * BLOCK_SIZE); 
+    return topY + y * BLOCK_SIZE;
 }
+
 
 void Board::DebugFillLine(int y) {
     for (int x = 0; x < BOARD_WIDTH; ++x) {

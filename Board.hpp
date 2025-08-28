@@ -18,7 +18,7 @@ class Board {
         public:
         enum { POS_FREE = 0, POS_FILLED = 1 };
 
-        Board();
+        Board(int screenW, int screenH);
 
         bool IsFreeBlock(int x, int y) const;
         void PrintBoard() const;
@@ -34,7 +34,8 @@ class Board {
         int GetYPosInPixels(int y);
 
     private:
-
+        int screenWidth;
+        int screenHeight;
         void InitBoard();
         int mBoard[BOARD_HEIGHT][BOARD_WIDTH];
         std::array<Tetromino::Rotations, Tetromino::NUM_TYPE> allPieces;

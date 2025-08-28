@@ -17,6 +17,12 @@ void Piece::MoveDown()
 {
     ++y;
 }
+
+void Piece::MoveUp()
+{
+    --y;
+}
+
 void Piece::Rotate()
 {
     rotation = (rotation + 1) % Tetromino::NUM_ROT;

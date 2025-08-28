@@ -119,9 +119,13 @@ int main() {
         return 1;
     }
 
-    Board board;         
-    Tetromino tetromino;  
-    Game game(&board, &tetromino, &io, 480); 
+
+
+
+    Board board(io.GetScreenWidth(), io.GetScreenHeight());
+    Tetromino tetromino;
+    Game game(&board, &tetromino, &io, io.GetScreenHeight());
+
     bool running = true;
 
     while (running) {

@@ -18,7 +18,7 @@ class Game {
 
         void DrawScene ();
         void CreateNewPiece ();
-        void DrawPiece(const Piece& piece);
+        void DrawPiece(const Piece& piece, bool isNext);
 
         void MoveLeft();
         void MoveRight();

@@ -12,6 +12,7 @@ class Piece {
         void MoveLeft();
         void MoveRight();
         void MoveDown();
+        void MoveUp();
         void Rotate();
         void RotateBack();
 
