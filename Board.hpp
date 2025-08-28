@@ -1,9 +1,12 @@
-
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
+class Piece;
+
 #include <iostream>
 #include "Tetromino.hpp"
+#include "Piece.hpp"
+#include <vector>
 
 #define BOARD_WIDTH 10
 #define BOARD_HEIGHT 20

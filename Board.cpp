@@ -76,7 +76,7 @@ bool Board::IsPossibleMovement (const Piece& piece) const
 {
     std::vector<std::pair<int, int>> blocks = piece.GetBlocks();
 
-    for (int i = 0; i < blocks.size(); ++k)
+    for (int i = 0; i < blocks.size(); ++i)
     {
         int bx = blocks[i].first;
         int by = blocks[i].second;

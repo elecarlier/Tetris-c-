@@ -1,8 +1,8 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "IO.h"
-#include <time.h>
+#include "IO.hpp"
+#include <ctime>
 #include <cstdlib>
 
 #include "Tetromino.hpp"
@@ -18,11 +18,13 @@ class Game {
 
         void DrawScene ();
         void CreateNewPiece ();
+        void DrawPiece(const Piece& piece);
 
         void MoveLeft();
         void MoveRight();
         void MoveDown();
         void RotatePiece();
+
 
     private:
 
@@ -37,10 +39,8 @@ class Game {
         int mScreenHeight;
 
         int GetRand(int a, int b);
-        // int GetRand (int pA, int pB);
-        // void InitGame();
-        // void DrawPiece (int pX, int pY, int pPiece, int pRotation);
         void DrawBoard ();
+        void StoreCurrentPiece();
 };
 
 #endif

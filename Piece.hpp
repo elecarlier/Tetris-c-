@@ -2,6 +2,8 @@
 #define PIECE_HPP
 
 #include "Tetromino.hpp"
+#include "Board.hpp"
+#include <vector>
 
 class Piece {
     public:

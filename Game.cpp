@@ -44,8 +44,8 @@ void Game::DrawBoard ()
     int mX2 = mX1 + (BOARD_WIDTH * BLOCK_SIZE);
     int mY  = mScreenHeight - (BOARD_HEIGHT * BLOCK_SIZE);
 
-    mIO->DrawRectangle(mX1 - BOARD_LINE_WIDTH, mY, mX1, mScreenHeight - 1, BLUE);
-    mIO->DrawRectangle(mX2, mY, mX2 + BOARD_LINE_WIDTH, mScreenHeight - 1, BLUE);
+    mIO->DrawRectangle(mX1 - BOARD_WIDTH, mY, mX1, mScreenHeight - 1, BLUE);
+    mIO->DrawRectangle(mX2, mY, mX2 + BOARD_WIDTH, mScreenHeight - 1, BLUE);
 
 
     for (int i = 0; i < BOARD_WIDTH; i++) {
@@ -62,7 +62,6 @@ void Game::DrawBoard ()
         }
     }
 }
-
 
 void Game::DrawPiece(const Piece& piece)
 {
@@ -90,7 +89,33 @@ void Game::DrawPiece(const Piece& piece)
 }
 void Game::DrawScene()
 {
+    mIO->ClearScreen();
     DrawBoard();
     DrawPiece(mCurrentPiece);
     DrawPiece(mNextPiece);
+    mIO->UpdateScreen();
+    
+}
+
+
+void Game::MoveLeft() {
+    if (mBoard->IsPossibleMovement(mCurrentPiece))
+        mCurrentPiece.MoveLeft();
+}
+
+void Game::MoveRight() {
+    if (mBoard->IsPossibleMovement(mCurrentPiece))
+        mCurrentPiece.MoveRight();
+}
+
+void Game::MoveDown() {
+    if (mBoard->IsPossibleMovement(mCurrentPiece))
+        mCurrentPiece.MoveDown();
+}
+
+void Game::RotatePiece() {
+    mCurrentPiece.Rotate();
+    if (!mBoard->IsPossibleMovement(mCurrentPiece)) {
+        mCurrentPiece.RotateBack();
+    }
 }
