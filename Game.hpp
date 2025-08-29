@@ -9,7 +9,7 @@
 #include "Board.hpp"
 #include "Piece.hpp"
 
-#define WAIT_TIME 700 // Number of milliseconds that the piece remains before going 1 block down
+#define WAIT_TIME 500 // Number of milliseconds that the piece remains before going 1 block down
 
 class Game {
     public:
@@ -24,6 +24,7 @@ class Game {
         void MoveRight();
         void MoveDown();
         void RotatePiece();
+        void FallDown();
 
 
     private:

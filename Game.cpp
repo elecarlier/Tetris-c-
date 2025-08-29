@@ -123,8 +123,16 @@ void Game::MoveRight() {
 
 void Game::MoveDown() {
     mCurrentPiece.MoveDown();
-    if (!mBoard->IsPossibleMovement(mCurrentPiece))
+    if (!mBoard->IsPossibleMovement(mCurrentPiece)) {
         mCurrentPiece.MoveUp();
+        StoreCurrentPiece();        
+        mBoard->DeletePossibleLines(); 
+        if (mBoard->IsGameOver()) {
+            std::cout << "Game Over!" << std::endl;
+            exit(0);
+        }
+        CreateNewPiece();
+    }
 }
 
 void Game::RotatePiece() {
@@ -132,4 +140,34 @@ void Game::RotatePiece() {
     if (!mBoard->IsPossibleMovement(mCurrentPiece)) {
         mCurrentPiece.RotateBack();
     }
+}
+
+// void Game::FallDown()
+// {
+//     while(mBoard->IsPossibleMovement(mCurrentPiece))
+//     {
+//         mCurrentPiece.MoveDown();
+//         if (!mBoard->IsPossibleMovement(mCurrentPiece))
+//         {
+//             mCurrentPiece.MoveUp();
+//             break;
+//         }
+//         DrawScene();
+//     }
+        
+// }
+
+void Game::FallDown() {
+    
+    while (mBoard->IsPossibleMovement(mCurrentPiece)) 
+        mCurrentPiece.MoveDown();
+    mCurrentPiece.MoveUp();
+    StoreCurrentPiece();        
+    mBoard->DeletePossibleLines(); 
+    if (mBoard->IsGameOver()) {
+        std::cout << "Game Over!" << std::endl;
+        exit(0);
+    }
+    CreateNewPiece();
+
 }

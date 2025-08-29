@@ -51,30 +51,6 @@ void Board::StorePiece(const Piece& piece)
 }
 
 
-// /*Store a piece at px, py position
-//     using the pivot as the position */
-// void Board::StorePiece(int pX, int pY, int pPieceType, int pRotation)
-// {
-//     const auto& shape = allPieces[pPieceType][pRotation];
-//     const int pivot_i = 2;
-//     const int pivot_j = 2;
-
-//     for (int i = 0; i < Tetromino::SIZE; ++i) {
-//         for (int j = 0; j < Tetromino::SIZE; ++j) {
-
-//             if (shape[i][j] != 0) {
-//                 int boardY = pY + (i - pivot_i);
-//                 int boardX = pX + (j - pivot_j);
-
-//                 if (boardX >= 0 && boardX < BOARD_WIDTH &&
-//                     boardY >= 0 && boardY < BOARD_HEIGHT)  {
-//                     mBoard[boardY][boardX] = POS_FILLED;
-//                 }
-//             }
-//         }
-//     }
-// }
-
 /*Check for collisions with border or oder pieces*/
 bool Board::IsPossibleMovement (const Piece& piece) const
 {
